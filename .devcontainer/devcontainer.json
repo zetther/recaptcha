@@ -1,0 +1,15 @@
+{
+  "name": "Zetther reCAPTCHA Fake",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:5.2.5-24-bookworm",
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": {
+      "label": "Zetther reCAPTCHA Fake — frontend + backend",
+      "onAutoForward": "openBrowser",
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "npm ci",
+  "postStartCommand": "node scripts/codespaces-start.mjs",
+  "remoteUser": "node"
+}

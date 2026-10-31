@@ -1,0 +1,15 @@
+services:
+  captcha:
+    build: .
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-http://localhost:3000}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}
+      CAPTCHA_SECRET: ${CAPTCHA_SECRET:-}
+      SITE_KEY: ${SITE_KEY:-zetther_local_demo}
+    volumes:
+      - captcha-data:/app/.data
+    restart: unless-stopped
+volumes:
+  captcha-data:

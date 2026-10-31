@@ -1,0 +1,57 @@
+name: Build, test, and run
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Typecheck, security lifecycle tests, and production build
+        run: npm run check
+      - name: Audit production dependencies
+        run: npm audit --omit=dev --audit-level=high
+      - name: Start the production app and verify HTTP responses
+        run: node scripts/smoke.mjs
+      - name: Build the standalone Docker image
+        run: docker build -t zetther-recaptcha-fake:ci .
+      - name: Run the Docker image
+        shell: bash
+        run: |
+          docker run --detach --name captcha-ci -p 127.0.0.1:3000:3000 zetther-recaptcha-fake:ci
+          trap 'docker logs captcha-ci; docker rm -f captcha-ci' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:3000/health; then
+              curl --fail --silent http://127.0.0.1:3000/ | grep -q 'Zetther reCAPTCHA Fake'
+              exit 0
+            fi
+            sleep 1
+          done
+          exit 1
+      - name: Save compiled application
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: zetther-recaptcha-fake-build
+          path: |
+            dist/
+            public/widget.js
+            package.json
+            package-lock.json
+          retention-days: 7
