@@ -106,16 +106,6 @@ button:disabled {
   color: #7c8880;
   padding-left: 5px;
 }
-.version {
-  margin-left: 14px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  padding: 5px 7px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  color: #919a94;
-}
 .top-actions {
   display: flex;
   align-items: center;
@@ -235,13 +225,6 @@ button:disabled {
   height: 34px;
   border-radius: 7px;
   color: #6b776f;
-}
-.project-card small {
-  display: block;
-  margin-top: 4px;
-  color: #97a097;
-  font-weight: 400;
-  font-size: 9px;
 }
 .project-card .tiny-dot {
   margin-left: auto;
@@ -1427,9 +1410,6 @@ footer button {
   .main {
     padding: 26px 26px 0;
   }
-  .version {
-    display: none;
-  }
   .hero-mark {
     width: 140px;
     height: 145px;
@@ -1520,9 +1500,6 @@ footer button {
   }
   footer {
     flex-wrap: wrap;
-  }
-  footer p {
-    font-size: 7px;
   }
 }
 @media (max-width: 650px) {
@@ -1726,11 +1703,6 @@ footer button {
     margin-top: 30px;
     gap: 12px;
     justify-content: space-between;
-  }
-  footer > p {
-    order: 3;
-    width: 100%;
-    font-size: 8px;
   }
   footer button {
     font-size: 8px;

@@ -217,7 +217,6 @@ function App() {
           <strong>
             Zetther<span>reCAPTCHA Fake</span>
           </strong>
-          <span className="version">LAB / 01</span>
         </a>
         <div className="top-actions">
           <span className="environment">
@@ -264,9 +263,7 @@ function App() {
               <div className="project-card-icon">
                 <Braces size={19} />
               </div>
-              <span>
-                Zetther CAPTCHA<small>Independent rebuild</small>
-              </span>
+              <span>Zetther CAPTCHA</span>
               <span className="tiny-dot" />
             </div>
             <button className="help-link" onClick={() => setHelp(true)}>
@@ -687,7 +684,6 @@ function App() {
               <span className="tiny-dot" /> Zetther reCAPTCHA Fake{" "}
               <span className="footer-version">v0.1.0</span>
             </span>
-            <p>Built by Zetther · Independent of Google</p>
             <button onClick={() => setHelp(true)}>
               About this project <ArrowUpRight size={12} />
             </button>
@@ -713,15 +709,12 @@ function App() {
             <ShieldCheck size={30} />
             <h2 id="about-title">Zetther reCAPTCHA Fake</h2>
             <p>
-              An independent CAPTCHA project by Zetther, inspired by checkbox
-              and image challenges. Illustrations are generated on your server,
-              with answers and tokens checked in your own backend.
+              Complete an image challenge in the Playground, connect the widget
+              from Integration, or review recent requests in Activity.
             </p>
             <p>
-              This is a functional prototype. Its small illustration dataset is
-              not intended as production bot protection. Image selection
-              supports keyboard navigation; nonvisual challenges are planned for
-              a later release.
+              The demo dataset is for development. Production bot protection and
+              nonvisual challenges are not supported.
             </p>
             <a
               className="submit-button"
